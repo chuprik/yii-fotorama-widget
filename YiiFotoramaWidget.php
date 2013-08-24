@@ -55,10 +55,11 @@ class YiiFotoramaWidget extends CWidget
         }
 
         if ($this->selector === null) {
+            $fotoramaHtmlOptions = array();
             foreach ($this->options as $option => $value) {
-                $option = 'data-' . $option;
+                $fotoramaHtmlOptions['data-' . $option] = $value;
             }
-            $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions, $this->options);
+            $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions, $fotoramaHtmlOptions);
         } else {
             $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions);
         }
