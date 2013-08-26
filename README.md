@@ -19,7 +19,7 @@ Or call the widget with Fotorama [options](http://fotorama.io/customize/):
 ```php
 <?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget', array(
     'selector' => '#fotorama', // For custom selector binding Fotorama
-    'useCdn' => 'true', // For register fotorama.js css fotorama.css from s3 cdn
+    'useCdn' => 'true', // For register fotorama.js and fotorama.css from s3 cdn
     'options' => array(
         'nav' => 'thumbs',
     ),
