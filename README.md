@@ -1,6 +1,6 @@
 # yii-fotorama-widget
 
-`YiiFotoramaWidget` is a wrapper for [Fotorama](http://fotorama.io/), a simple, stunning, powerful jQuery gallery.
+`YiiFotoramaWidget` is a wrapper for [Fotorama](http://fotorama.io/).
 
 ## Usage
 
