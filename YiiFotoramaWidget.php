@@ -11,7 +11,7 @@
 class YiiFotoramaWidget extends CWidget
 {
     const PACKAGE_ID = 'fotorama';
-    const FOTORAMA_VERSION = '4.3.4.1';
+    const FOTORAMA_VERSION = '4.4.4';
 
     /**
      * @var string
