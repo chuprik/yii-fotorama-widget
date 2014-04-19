@@ -11,7 +11,7 @@
 class YiiFotoramaWidget extends CWidget
 {
     const PACKAGE_ID = 'fotorama';
-    const FOTORAMA_VERSION = '4.4.6';
+    const FOTORAMA_VERSION = '4.5.1';
 
     /**
      * @var string
@@ -60,7 +60,7 @@ class YiiFotoramaWidget extends CWidget
             $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions);
         }
 
-        $this->_registerClientScript();
+        $this->registerClientScript();
         echo CHtml::openTag($this->tagName, $this->htmlOptions);
     }
 
@@ -71,19 +71,19 @@ class YiiFotoramaWidget extends CWidget
         echo CHtml::closeTag($this->tagName);
     }
 
-    protected function _registerClientScript()
+    protected function registerClientScript()
     {
-        $this->_fillPackage();
+        $this->fillPackage();
 
         Yii::app()->getClientScript()->registerPackage(self::PACKAGE_ID);
 
         if ($this->selector !== null) {
             Yii::app()->getClientScript()->registerScript($this->id,
-                    '$(\'' . $this->selector . '\').fotorama(' . CJSON::encode($this->options) . ');');
+                '$(\'' . $this->selector . '\').fotorama(' . CJSON::encode($this->options) . ');');
         }
     }
 
-    protected function _fillPackage()
+    protected function fillPackage()
     {
         $this->_package = array(
             'css' => array('fotorama.css'),
@@ -92,15 +92,15 @@ class YiiFotoramaWidget extends CWidget
         );
 
         if ($this->useCdn) {
-            $this->_package['baseUrl'] = 'http://fotorama.s3.amazonaws.com/' . self::FOTORAMA_VERSION . '/';
+            $this->_package['baseUrl'] = '//cdnjs.cloudflare.com/ajax/libs/fotorama/' . self::FOTORAMA_VERSION . '/';
         } else {
-            $this->_package['baseUrl'] = $this->_getAssetsUrl();
+            $this->_package['baseUrl'] = $this->getAssetsUrl();
         }
 
         Yii::app()->getClientScript()->addPackage(self::PACKAGE_ID, $this->_package);
     }
 
-    protected function _getAssetsUrl()
+    protected function getAssetsUrl()
     {
         return Yii::app()->getAssetManager()->publish(dirname(__FILE__) . '/assets');
     }
