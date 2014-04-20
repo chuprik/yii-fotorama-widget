@@ -1,0 +1,16 @@
+{
+    "name": "kotchuprik/yii-fotorama-widget",
+    "description": "Fotorama widget for Yii",
+    "license": "MIT",
+    "homepage": "https://github.com/kotchuprik/yii-fotorama-widget",
+    "authors": [
+        {
+            "name": "Constantin Chuprik",
+            "email": "constantinchuprik@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3"
+    },
+    "minimum-stability": "dev"
+}
