@@ -1,6 +1,8 @@
 {
     "name": "kotchuprik/yii-fotorama-widget",
     "description": "Fotorama widget for Yii",
+    "keywords": ["yii", "fotorama", "extension"],
+    "type": "yii-extension",
     "license": "MIT",
     "homepage": "https://github.com/kotchuprik/yii-fotorama-widget",
     "authors": [
