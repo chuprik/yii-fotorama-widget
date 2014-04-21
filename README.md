@@ -4,7 +4,7 @@ The `YiiFotoramaWidget` is the wrapper for the [Fotorama](http://fotorama.io/).
 
 ## Usage
 
-To call the widget:
+To call the widget you should use:
 
 ```php
 <?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget', array(
@@ -17,7 +17,7 @@ To call the widget:
 <?php $this->endWidget(); ?>
 ```
 
-To call the widget with the Fotorama [options](http://fotorama.io/customize/):
+To call the widget with the Fotorama [options](http://fotorama.io/customize/) you should use:
 
 ```php
 <?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget', array(
