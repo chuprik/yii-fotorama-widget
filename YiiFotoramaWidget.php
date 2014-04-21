@@ -11,53 +11,49 @@
 class YiiFotoramaWidget extends CWidget
 {
     const PACKAGE_ID = 'fotorama';
-    const FOTORAMA_VERSION = '4.5.1';
+    const FOTORAMA_CSS_CLASS = 'fotorama';
+
+    /**
+     * @var array {@link http://fotorama.io/customize/ Fotorama options}
+     */
+    public $options = array();
 
     /**
      * @var string
      */
     public $tagName = 'div';
 
-    /** @var string */
-    public $selector = null;
-
     /**
-     * @var array {@link http://fotorama.io/customize/ fotorama options}
+     * @var string Fotorama version
      */
-    public $options = array();
+    public $version;
 
     /**
      * @var array
      */
     public $htmlOptions = array();
 
-    /**
-     * @var bool
-     */
-    public $useCdn = false;
-
-    private $_defaultHtmlOptions = array(
-        'class' => 'fotorama',
-    );
-
-    private $_package = array();
+    private $package = array();
 
     public function init()
     {
-        parent::init();
-
-        if ($this->selector !== null) {
-            unset($this->_defaultHtmlOptions['class']);
+        if (empty($this->version)) {
+            throw new YiiFotoramaWidgetException('You must set fotorama version.');
         }
 
-        if ($this->selector === null) {
-            $fotoramaHtmlOptions = array();
-            foreach ($this->options as $option => $value) {
-                $fotoramaHtmlOptions['data-' . $option] = $value;
+        parent::init();
+
+        if (!empty($this->htmlOptions['class'])) {
+            $classes = explode(' ', $this->htmlOptions['class']);
+            if (!in_array(self::FOTORAMA_CSS_CLASS, $classes)) {
+                $this->htmlOptions['class'] .= ' ' . self::FOTORAMA_CSS_CLASS;
             }
-            $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions, $fotoramaHtmlOptions);
         } else {
-            $this->htmlOptions = CMap::mergeArray($this->_defaultHtmlOptions, $this->htmlOptions);
+            $this->htmlOptions['class'] = self::FOTORAMA_CSS_CLASS;
+        }
+
+        foreach ($this->options as $option => $value) {
+            $this->htmlOptions['data-' . $option] = $value;
         }
 
         $this->registerClientScript();
@@ -73,35 +69,19 @@ class YiiFotoramaWidget extends CWidget
 
     protected function registerClientScript()
     {
-        $this->fillPackage();
-
-        Yii::app()->getClientScript()->registerPackage(self::PACKAGE_ID);
-
-        if ($this->selector !== null) {
-            Yii::app()->getClientScript()->registerScript($this->id,
-                '$(\'' . $this->selector . '\').fotorama(' . CJSON::encode($this->options) . ');');
-        }
-    }
-
-    protected function fillPackage()
-    {
-        $this->_package = array(
+        $this->package = array(
+            'baseUrl' => '//cdnjs.cloudflare.com/ajax/libs/fotorama/' . $this->version . '/',
             'css' => array('fotorama.css'),
             'js' => array('fotorama.js'),
             'depends' => array('jquery'),
         );
 
-        if ($this->useCdn) {
-            $this->_package['baseUrl'] = '//cdnjs.cloudflare.com/ajax/libs/fotorama/' . self::FOTORAMA_VERSION . '/';
-        } else {
-            $this->_package['baseUrl'] = $this->getAssetsUrl();
-        }
-
-        Yii::app()->getClientScript()->addPackage(self::PACKAGE_ID, $this->_package);
+        Yii::app()->getClientScript()->addPackage(self::PACKAGE_ID, $this->package);
+        Yii::app()->getClientScript()->registerPackage(self::PACKAGE_ID);
     }
+}
 
-    protected function getAssetsUrl()
-    {
-        return Yii::app()->getAssetManager()->publish(dirname(__FILE__) . '/assets');
-    }
+class YiiFotoramaWidgetException extends Exception
+{
+
 }

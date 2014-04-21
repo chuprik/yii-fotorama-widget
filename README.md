@@ -1,13 +1,16 @@
 # yii-fotorama-widget
 
-`YiiFotoramaWidget` is a wrapper for [Fotorama](http://fotorama.io/).
+`YiiFotoramaWidget` is a wrapper for the [Fotorama](http://fotorama.io/).
 
 ## Usage
 
 Call the widget:
 
 ```php
-<?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget'); ?>
+<?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget', array(
+    // you must specify the version (available versions http://cdnjs.com/libraries/fotorama)
+    'version' => '4.5.1',
+)); ?>
     <img src="/img/1.jpg"/>
     <img src="/img/2.jpg"/>
     <img src="/img/3.jpg"/>
@@ -18,14 +21,12 @@ Or call the widget with Fotorama [options](http://fotorama.io/customize/):
 
 ```php
 <?php $this->beginWidget('ext.yii-fotorama-widget.YiiFotoramaWidget', array(
-    'selector' => '#fotorama', // For custom selector binding Fotorama
-    'useCdn' => 'true', // For register fotorama.js and fotorama.css from s3 cdn
+    'version' => '4.5.1',
     'options' => array(
         'nav' => 'thumbs',
     ),
     'htmlOptions' => array(
-        'id' => '#fotorama',
-        'class' => 'myFotoramaCssClass',
+        'class' => 'anotherCssClass',
     ),
 )); ?>
     <img src="/img/1.jpg"/>
